@@ -1,0 +1,21 @@
+{
+  "name": "AZ Distribution — Iranian Wholesale Mirpur AJK",
+  "short_name": "AZ Distribution",
+  "description": "Wholesale supplier of authentic Iranian chocolates, candies, dates and gum in Mirpur, Azad Kashmir.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF7F0",
+  "theme_color": "#D4AF37",
+  "lang": "en-PK",
+  "categories": ["business", "shopping", "food"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

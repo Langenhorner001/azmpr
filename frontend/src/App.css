@@ -1,0 +1,32 @@
+/* AZ Distribution – App-wide CSS */
+
+.App {
+    min-height: 100vh;
+}
+
+/* Smooth scrolling offset for sticky navbar */
+section[id] {
+    scroll-margin-top: 70px;
+}
+
+/* Product image aspect ratio */
+.product-img-wrap {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+/* Testimonial card scroll container */
+.testimonials-scroll::-webkit-scrollbar {
+    height: 3px;
+}
+.testimonials-scroll::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+}
