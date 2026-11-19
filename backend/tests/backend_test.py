@@ -8,7 +8,7 @@ import pytest
 import requests
 
 BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://azdist-preview.preview.emergentagent.com").rstrip("/")
-ADMIN_PASSWORD = "azdist2026"
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 EXPECTED_CATEGORIES = {"chocolates", "candies-toffees", "chewing-gum", "dates-dryfruits", "accessories"}
 EXPECTED_TOTAL = 50
 
