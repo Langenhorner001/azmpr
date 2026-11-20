@@ -1,16 +1,18 @@
 {
-  "summary": "Verified backend startup and core API routes after pinning aiofiles==25.1.0. Backend imports cleanly, supervisor shows backend RUNNING, and all 25 pytest cases pass against the public preview URL. Covered: /api/health, /api/products (list + category filter + hidden exclusion), /api/contact (valid+minimal+422), /api/admin/login (success+401), /api/admin/stats (no/invalid/valid token), /api/admin/products CRUD, visibility toggle, bulk visibility, bulk delete.",
+  "summary": "Tested the price-hiding / WhatsApp deal feature on both backend and frontend. Everything passed. Backend: 7/7 pytest. Public /api/products returns price='Contact for pricing' for all 50 products, with no 'Rs <amount>' anywhere in the raw response. Admin /api/admin/products still returns real prices such as 'Rs 1,999', and the admin edit modal shows 'Rs 1,999'. Frontend: the home page loads with all sections and 50 cards. No card shows a price: 0 'Rs' amounts, 0 strikethrough elements and no 'Contact for pricing' text on the page. Each card has a green (#25D366) deal button. All 50 buttons link to https://wa.me/923184214075?text=..., open in a new tab, and the text decodes to 'Assalam o Alaikum, mujhe <name> ki deal chahiye.' The sort dropdown has only Featured / Best Selling / Top Rated / Newest, and every option works. Search ('fox' gives 1 result) and the category chips (chocolates gives 24, all gives 50) work. In the cart, adding items and changing quantity work. Each item shows 'Price WhatsApp par' and the subtotal shows 'Behtareen Deal WhatsApp par'. Checkout opens WhatsApp in a new tab with item names and quantities and no Rs amounts or total. The admin panel login works. At 390px mobile width the buttons fit inside the cards and the page does not scroll sideways (scrollWidth is 390).",
   "backend_issues": {"critical": [], "minor": []},
   "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
-  "test_report_links": ["/app/backend/tests/backend_test.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "test_report_links": ["/app/backend/tests/test_price_hiding.py", "/app/test_reports/pytest/pytest_results.xml"],
   "action_items": [],
-  "critical_code_review_comments": ["Frontend and mobile supervisor processes are in FATAL state (Exited too quickly) — out of scope for this backend-only bug-fix verification, but worth noting if a frontend test run is requested later."],
-  "updated_files": ["/app/backend/tests/backend_test.py (switched ADMIN_PASSWORD to env-based default 'admin123' to match /app/backend/.env; no application code changed)"],
-  "success_rate": {"backend": "100%", "frontend": "N/A"},
-  "test_credentials": "Admin password: admin123 (from backend/.env ADMIN_PASSWORD)",
-  "seed_data_creation": "Tests created transient TEST_ contact inquiries and TEST_ products; CRUD/bulk-delete tests clean up their own created records by id. Hide/unhide and bulk-visibility tests restore state in finally blocks. 50-product seed verified intact.",
+  "critical_code_review_comments": [
+    "The admin product table never had a price column (this was already the case before the change). Admins see prices only in the edit modal and through the API. This is fine.",
+    "CartContext still parses product.price, which is now always 'Contact for pricing', so the numeric total is unused and harmless. It could be cleaned up.",
+    "Existing /app/backend/tests/backend_test.py (from the original repo) has a hardcoded fallback URL and admin password 'admin123'. It does not match the current password azdist2026, which is the reason the new file test_price_hiding.py was written."
+  ],
+  "updated_files": ["/app/backend/tests/test_price_hiding.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. No data was created or modified.",
   "retest_needed": false,
-  "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "aiofiles==25.1.0 pin resolves the production ModuleNotFoundError. Backend serves all documented /api routes on https://emergent-landing-12.preview.emergentagent.com. Use ADMIN_PASSWORD env (default admin123). backend_test.py is the full regression suite — all 25 green in ~6s.",
-  "rca of the issue": "Loose constraint `aiofiles>=24.1.0` in requirements.txt allowed pip resolver to select an incompatible wheel or skip install in the production build environment, triggering ModuleNotFoundError at /app/backend/server.py line 8 on startup. Pinning to aiofiles==25.1.0 ensures a deterministic, verified install. Post-fix: supervisor backend RUNNING, /api/health 200 OK, 25/25 pytest cases pass."
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Price-hiding feature verified. Regression file: /app/backend/tests/test_price_hiding.py. Admin password: azdist2026. Product cards animate into view, so scroll before taking screenshots. Search testid: product-search-input. Category chips: category-chip-{id}. Cart opens via header cart button."
 }

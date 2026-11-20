@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, MessageCircle, Sun, Moon, Monitor, ShoppingBag } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { useCart } from "../../context/CartContext";
-import { NAV_LINKS, BRAND, waUrl } from "./constants";
-
-const HEADER_WA = waUrl(
-  "Hello AZ Distribution, I would like to know more about your wholesale catalog and pricing."
-);
+import { NAV_LINKS, BRAND } from "./constants";
+import { useSiteSettings } from "../../context/SiteSettingsContext";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { mode, toggleTheme } = useTheme();
   const { count, openCart } = useCart();
+  const { settings, waUrl } = useSiteSettings();
+  const HEADER_WA = waUrl(settings.header.header_whatsapp_message);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -106,7 +105,7 @@ const Header = () => {
                 data-testid="header-whatsapp-btn"
               >
                 <MessageCircle size={15} />
-                WhatsApp
+                {settings.header.header_button_label || "WhatsApp"}
               </a>
 
               <CartButton testid="header-cart-btn" />

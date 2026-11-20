@@ -85,6 +85,22 @@ module.exports = {
                     from: { transform: 'translateX(-100%)', opacity: '0' },
                     to: { transform: 'translateX(0)', opacity: '1' },
                 },
+                'marquee': {
+                    from: { transform: 'translateX(0)' },
+                    to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+                },
+                'border-spin': {
+                    from: { transform: 'translate(-50%, -50%) rotate(0deg)' },
+                    to: { transform: 'translate(-50%, -50%) rotate(360deg)' },
+                },
+                'shine': {
+                    '0%': { left: '-40%' },
+                    '55%, 100%': { left: '120%' },
+                },
+                'gradient-x': {
+                    '0%, 100%': { backgroundPosition: '0% 50%' },
+                    '50%': { backgroundPosition: '100% 50%' },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
@@ -95,6 +111,10 @@ module.exports = {
                 'gold-pulse': 'gold-pulse 2s ease-in-out infinite',
                 'shimmer': 'shimmer 2.5s linear infinite',
                 'slide-in': 'slide-in 0.3s ease-out',
+                'marquee': 'marquee var(--duration, 40s) linear infinite',
+                'border-spin': 'border-spin 6s linear infinite',
+                'shine': 'shine 3.2s ease-in-out infinite',
+                'gradient-x': 'gradient-x 6s ease infinite',
             },
         }
     },

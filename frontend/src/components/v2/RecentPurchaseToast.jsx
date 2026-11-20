@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingBag } from "lucide-react";
 
 // PLACEHOLDER social-proof toast — uses synthetic name/city/time per cycle.
-// Picks real product names from the loaded /api/products array if available,
-// otherwise falls back to the static sample set below.
+// Picks only from products visible (and in stock) on the landing page.
 
 const NAMES = [
   "Ahmed", "Bilal", "Fatima", "Hassan", "Ayesha", "Usman", "Zainab",
@@ -22,12 +21,6 @@ const CITIES = [
 const TIMES = [
   "just now", "1 minute ago", "3 minutes ago", "8 minutes ago",
   "15 minutes ago", "an hour ago",
-];
-
-const FALLBACK_PRODUCTS = [
-  { product_name: "FOX Choco Wafer Chocolate Bar", image_url: null },
-  { product_name: "Imported Chocolate Box", image_url: null },
-  { product_name: "Persian Date Mix", image_url: null },
 ];
 
 const SHOW_AFTER_INITIAL = 5000;
@@ -49,10 +42,20 @@ const RecentPurchaseToast = ({ products }) => {
   });
   const timersRef = useRef([]);
 
-  const productPool = products && products.length > 0 ? products : FALLBACK_PRODUCTS;
+  // Only products that are live on the landing page and in stock — never hidden/trashed ones
+  const productPool = useMemo(
+    () =>
+      (products || []).filter(
+        (p) => !p.hidden && !p.deleted && p.stock_status !== "Out of Stock" && p.stock !== 0
+      ),
+    [products]
+  );
+
+  const poolRef = useRef(productPool);
+  poolRef.current = productPool;
 
   const generateEntry = () => {
-    const product = pick(productPool);
+    const product = pick(poolRef.current);
     return {
       name: pick(NAMES),
       city: pick(CITIES),
@@ -68,7 +71,7 @@ const RecentPurchaseToast = ({ products }) => {
   };
 
   useEffect(() => {
-    if (closed) return undefined;
+    if (closed || productPool.length === 0) return undefined;
     const cycle = (firstDelay) => {
       const showT = setTimeout(() => {
         setEntry(generateEntry());

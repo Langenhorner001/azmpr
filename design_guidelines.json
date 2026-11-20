@@ -1,0 +1,268 @@
+{
+  "project_name": "AZ Distribution - Hybrid Wholesale Marketplace & High-Efficiency Admin Control Center",
+  "archetype": "The Performance Pro meets Modern Editorial Commerce (21st.dev Magic UI aesthetic)",
+  "context": "hybrid_fullstack",
+  "theme_strategy": {
+    "landing_page": "Light & Dark mode toggle (class 'dark' on html), stone neutrals + vibrant amber-orange-rose gradient accents + WhatsApp emerald #25D366",
+    "admin_dashboard": "Clean modern executive dark/light workspace matching the brand palette (slate/stone-900 with amber-500 highlights, subtle 1px border lines, crystal glass stats, high-contrast readable data cells, moving border accents) instead of old muddy 90s gold-black"
+  },
+  "typography": {
+    "heading_font": "Plus Jakarta Sans, sans-serif (font-display)",
+    "body_font": "Inter, Plus Jakarta Sans, system-ui, sans-serif (font-sans)",
+    "mono_font": "JetBrains Mono, Menlo, monospace",
+    "urdu_font": "Noto Nastaliq Urdu, serif",
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.06]",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-bold tracking-tight",
+      "h4": "text-lg sm:text-xl font-bold",
+      "body": "text-base leading-relaxed text-stone-600 dark:text-stone-300",
+      "small": "text-xs font-semibold tracking-wide uppercase"
+    }
+  },
+  "colors": {
+    "brand_gradient": "linear-gradient(to right, #F59E0B, #F97316, #F43F5E)",
+    "brand_gradient_tailwind": "from-amber-500 via-orange-500 to-rose-500",
+    "whatsapp_emerald": "#25D366",
+    "whatsapp_hover": "#1fb359",
+    "light": {
+      "background": "#FFFFFF",
+      "surface_subtle": "#F5F5F4",
+      "surface_card": "#FFFFFF",
+      "border": "#E7E5E4",
+      "border_hover": "#D6D3D1",
+      "text_primary": "#1C1917",
+      "text_secondary": "#57534E",
+      "text_muted": "#A8A29E"
+    },
+    "dark": {
+      "background": "#0C0A09",
+      "surface_subtle": "#1C1917",
+      "surface_card": "#171412",
+      "border": "#292524",
+      "border_hover": "#44403C",
+      "text_primary": "#FAFAF9",
+      "text_secondary": "#D6D3D1",
+      "text_muted": "#78716C"
+    },
+    "admin_palette": {
+      "bg_base": "#0B0F17",
+      "bg_card": "#111827",
+      "bg_card_hover": "#1F2937",
+      "border": "rgba(245, 158, 11, 0.18)",
+      "border_active": "rgba(245, 158, 11, 0.45)",
+      "badge_available": "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30",
+      "badge_limited": "bg-amber-500/15 text-amber-400 border border-amber-500/30",
+      "badge_oos": "bg-rose-500/15 text-rose-400 border border-rose-500/30",
+      "badge_trash": "bg-purple-500/15 text-purple-400 border border-purple-500/30",
+      "badge_hidden": "bg-stone-500/20 text-stone-300 border border-stone-500/30"
+    }
+  },
+  "landing_21st_components": {
+    "hero_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/Hero.jsx",
+      "features": [
+        "Animated border-beam pill tag with pulse dot",
+        "Kinetic gradient text with smooth shimmer shine",
+        "Interactive Spotlight hover glow effect on CTA container",
+        "Floating decorative badges (e.g. 'Fast Dispatch 24h', 'Genuine Iranian Brands') with framer-motion gentle floating physics",
+        "Preserve exactly: HERO_WA link, WhatsApp CTA, Browse Products CTA, hero-headline, hero-subheadline, data-testids"
+      ]
+    },
+    "trust_badges_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/TrustBadges.jsx",
+      "features": [
+        "21st.dev Bento spotlight hover effect with radial spotlight gradient following cursor",
+        "Subtle 1px border shimmer on hover",
+        "Animated icon backdrop with micro-spring bounce on hover",
+        "Preserve: 4 tiles (Pakistan-wide Delivery, WhatsApp Support, Quality Verified, Best Wholesale Prices) with exact text and data-testids"
+      ]
+    },
+    "category_marquee_section": {
+      "component_path": "/app/frontend/src/components/v2/BrandMarquee.jsx",
+      "features": [
+        "21st.dev style infinite dual-direction smooth marquee strip (CSS / framer-motion loop)",
+        "Displays real Iranian snack categories and top imported items: Shirin Asal, Fox Chocolates, Persian Dates, Nabat, Masti Gum, Gaz-e-Isfahan, Choco Wafer, Lava Rolls",
+        "Pause on hover, gradient edge masks (fade-to-transparent on left and right) so it blends seamlessly into light/dark background",
+        "Respects prefers-reduced-motion"
+      ]
+    },
+    "why_az_bento_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/WhyAZ.jsx",
+      "features": [
+        "21st.dev Asymmetrical Bento Grid (Tetris Mode): Feature 1 (30s WhatsApp) as dominant hero tile with mockup preview or live interactive ticker, 3 supporting tiles with spotlight glow",
+        "Subtle glowing border beam or glass highlight",
+        "Preserve: all 4 feature descriptions and testids"
+      ]
+    },
+    "testimonials_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/Testimonials.jsx",
+      "features": [
+        "21st.dev Animated marquee or spotlight review cards with subtle quote ambient glow",
+        "Verified Retailer pill badges and star animations",
+        "Preserve: all 3 testimonials (Ahsan Hussain, Sana Akhtar, Zahid Khan) and data-testids"
+      ]
+    },
+    "stats_strip_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/StatsStrip.jsx",
+      "features": [
+        "21st.dev Number Ticker animation (counts up smoothly when in view: 100+, 50+, 4.9★, 24/7)",
+        "Subtle grid background with radial light leak",
+        "Preserve: stat testids"
+      ]
+    },
+    "final_cta_enhancement": {
+      "component_path": "/app/frontend/src/components/v2/FinalCTA.jsx",
+      "features": [
+        "21st.dev Moving Border / Border Beam on outer card",
+        "Floating ambient particles or glowing blur rings in background",
+        "Button shine animation on WhatsApp CTA",
+        "Preserve: FINAL_WA link and testids"
+      ]
+    },
+    "recent_purchase_toast_fix": {
+      "component_path": "/app/frontend/src/components/v2/RecentPurchaseToast.jsx",
+      "enhancement": "CRITICAL REQUIREMENT: Filter productPool to strictly ONLY show products where `!product.hidden` (hidden !== true). If only hidden products are passed, fallback to visible defaults so hidden products never leak into live social proof toast. Also verify product exists in live catalog."
+    },
+    "product_section_rule": {
+      "component_path": "/app/frontend/src/components/v2/ProductSection.jsx",
+      "rule": "MUST REMAIN UNTOUCHED IN BEHAVIOR: keep search, sort, category chips, green WhatsApp Deal button, Add to Cart, star reviews, and exact data-testids intact."
+    }
+  },
+  "admin_panel_architecture": {
+    "page_path": "/app/frontend/src/pages/AdminPanel.jsx",
+    "backend_path": "/app/backend/server.py",
+    "key_upgrades": {
+      "stats_dashboard": [
+        "Total Catalog Products",
+        "Visible on Website (Live)",
+        "Hidden / Paused",
+        "Out of Stock",
+        "Low Stock (<= 10 units)",
+        "Trash Bin Count"
+      ],
+      "tabs": [
+        {"id": "catalog", "label": "Product Catalog", "icon": "Package"},
+        {"id": "trash", "label": "Trash / Recycle Bin", "icon": "Trash2", "badge": "trash_count"},
+        {"id": "inquiries", "label": "Retailer Inquiries", "icon": "MessageSquare", "badge": "inquiries_count"}
+      ],
+      "multi_select_and_sticky_bulk_bar": {
+        "selection": "Per-row checkbox + header select-all (current page or filtered set)",
+        "sticky_bar": "Floats at top or bottom with selected count, Clear selection, Bulk Quick Edit, Bulk Make Visible, Bulk Hide, Bulk Move to Trash",
+        "bulk_edit_modal": {
+          "title": "Bulk Edit Selected Products",
+          "fields": [
+            "Change Category (Dropdown with toggle)",
+            "Change Stock Status (Available, Limited Stock, Out of Stock)",
+            "Set Stock Quantity (Fixed value or skip)",
+            "Adjust Price: Set fixed price string OR % adjustment on numeric price (e.g. +10%, -10%)",
+            "Set Visibility (Show on website / Hide from website)"
+          ]
+        }
+      },
+      "inline_quick_edit": {
+        "fields": "Price, Stock quantity, Stock status dropdown, and Visibility toggle directly from table row without opening full modal",
+        "feedback": "Instant save with optimistic update + toast notification"
+      },
+      "add_product_modal_all_ways": {
+        "way_1_single": "Comprehensive modal with fields: product_name, category, price, stock_status, stock, description, image_url (or direct file upload), visible toggle. Includes 'Save & Add Another' button which resets form while keeping category for super fast repetitive entry.",
+        "way_2_duplicate": "Row action 'Duplicate Product' that clones existing product with '(Copy)' prefix, opens modal prefilled for 1-click clone.",
+        "way_3_excel_csv_import": {
+          "trigger": "Button 'Import CSV/Excel' in header",
+          "sample_template": "Downloadable CSV template (`az_distribution_products_template.csv`) with columns: product_name, category, price, stock_status, stock, image_url, description",
+          "upload_and_preview": "Parses CSV in browser, displays interactive preview table with validation (flags missing name/category/image), allows fixing before hitting 'Import X Products'. Supports CSV and XLSX."
+        },
+        "export_csv": "Export current catalog or filtered view to CSV file instantly"
+      },
+      "trash_and_recovery_flow": {
+        "soft_delete": "Delete button on product row moves product to Trash (is_trash=true or stock_status='In Trash' / in_trash=true).",
+        "toast_undo": "Sonner toast immediately displays 'Product moved to trash' with clickable 'Undo' button that restores it instantly.",
+        "trash_tab": {
+          "view": "Table of deleted items showing deleted timestamp and days remaining",
+          "actions": [
+            "Restore Product (moves back to catalog)",
+            "Delete Permanently (hard delete with double-confirmation dialog)",
+            "Bulk Restore selected",
+            "Empty Trash (clear all deleted products with confirmation)"
+          ]
+        }
+      }
+    }
+  },
+  "backend_api_extensions": {
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/admin/products?include_trash=true",
+        "purpose": "Admin list separating active products vs trash products"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/products/bulk-edit",
+        "body": {
+          "ids": "List[int]",
+          "category": "Optional[str]",
+          "stock_status": "Optional[str]",
+          "stock": "Optional[int]",
+          "price": "Optional[str]",
+          "price_percent_change": "Optional[float]",
+          "hidden": "Optional[bool]"
+        },
+        "purpose": "Batch edit any combination of fields across N products"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/products/bulk-trash",
+        "body": {"ids": "List[int]", "in_trash": "bool"},
+        "purpose": "Move selected products to trash or restore from trash"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/products/bulk-import",
+        "body": {"products": "List[ProductCreate]"},
+        "purpose": "Bulk insert imported products from CSV/Excel"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/admin/products/trash/empty",
+        "purpose": "Permanently purge all trashed products"
+      }
+    ]
+  },
+  "image_urls": [
+    {
+      "category": "imported_chocolates",
+      "url": "https://images.unsplash.com/photo-1548741487-18d363dc4469?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwzfHxpbXBvcnRlZCUyMGNob2NvbGF0ZSUyMGJveCUyMHBhY2thZ2luZ3xlbnwwfHx8fDE3OTUxODA3MDR8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Opened premium box of imported chocolates, pristine confectionery display"
+    },
+    {
+      "category": "imported_sweets_candy",
+      "url": "https://images.unsplash.com/photo-1574183878891-e08ec44abc37?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHw0fHxpbXBvcnRlZCUyMGNob2NvbGF0ZSUyMGJveCUyMHBhY2thZ2luZ3xlbnwwfHx8fDE3OTUxODA3MDR8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Assorted brand chocolate bars and snack confectionery packs"
+    },
+    {
+      "category": "persian_dates_nuts",
+      "url": "https://images.unsplash.com/photo-1648288718348-4b6d53755716?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwzfHxkYXRlcyUyMGRyeSUyMGZydWl0cyUyMGJvd2x8ZW58MHx8fHwxNzk1MTgwNzA4fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Wooden bowl filled with premium dates and dry fruits on rustic plate"
+    },
+    {
+      "category": "candies_toffees_colorful",
+      "url": "https://images.unsplash.com/photo-1633158832466-be592c721217?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwzfHxjYW5keSUyMHN3ZWV0JTIwY29sb3JmdWx8ZW58MHx8fHwxNzk1MTgwNzExfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Close up of vibrant colorful candies and sweet gummies"
+    }
+  ],
+  "accessibility_and_performance": {
+    "motion": "Respects prefers-reduced-motion using CSS or useReducedMotion() hook from framer-motion",
+    "mobile": "Strict test at 390px viewport width: no horizontal overflow, touch target size >= 44x44px",
+    "test_attributes": "All interactive elements (buttons, inputs, tabs, row actions, bulk actions, checkboxes) MUST have unique data-testid attributes",
+    "contrast": "All text and button labels must exceed 4.5:1 APCA/WCAG AA contrast against background. No purely transparent overlays without backdrop blur or scrim."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": {
+    "code_language": "JavaScript (.js and .jsx) — DO NOT create .tsx files",
+    "avoid_ai_slop": "Never use emoji icons like 🤖🧠💡. Use lucide-react icons exclusively.",
+    "no_universal_transition": "Do not write 'transition: all' which causes jitter with framer-motion transforms. Specify 'transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s'.",
+    "preserve_critical_flows": "Products grid, WhatsApp ordering direct links (waUrl), and Cart drawer MUST continue functioning seamlessly with no regression.",
+    "recent_purchase_toast": "MANDATORY: Ensure only unhidden products (hidden !== true) are displayed in the toast.",
+    "admin_login_auth": "Admin panel is protected by existing token ('az-admin-token') and backend JWT. All admin routes send Bearer Authorization header."
+  }
+}

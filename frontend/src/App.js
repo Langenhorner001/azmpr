@@ -8,13 +8,13 @@ import Analytics from "./components/Analytics";
 import SEOHead from "./components/SEOHead";
 import Home from "./pages/Home";
 import AdminLogin from "./pages/AdminLogin";
-import AdminPanel from "./pages/AdminPanel";
+import AdminDashboard from "./pages/AdminDashboard";
 import "./App.css";
 
 const AdminRoute = () => {
   const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem("az-admin-token"));
   return isAuth
-    ? <AdminPanel onLogout={() => setIsAuth(false)} />
+    ? <AdminDashboard onLogout={() => setIsAuth(false)} />
     : <AdminLogin onLogin={() => setIsAuth(true)} />;
 };
 

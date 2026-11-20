@@ -1,5 +1,13 @@
 import React from "react";
 import { Truck, MessageCircle, ShieldCheck, Banknote } from "lucide-react";
+import { SpotlightCard } from "../magic/SpotlightCard";
+
+const SPOT = {
+  amber: "rgba(245,158,11,0.14)",
+  emerald: "rgba(16,185,129,0.14)",
+  rose: "rgba(244,63,94,0.12)",
+  sky: "rgba(14,165,233,0.13)",
+};
 
 const items = [
   {
@@ -45,13 +53,16 @@ const TrustBadges = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
       <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {items.map((it) => (
-          <li
+          <SpotlightCard
+            as="li"
             key={it.title}
-            className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 hover:shadow-md hover:-translate-y-0.5 transition-all"
+            color={SPOT[it.tone]}
+            className="rounded-2xl bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700 hover:-translate-y-0.5 transition-[transform,border-color] duration-300"
+            innerClassName="flex items-start gap-3 sm:gap-4 p-3 sm:p-4"
             data-testid={`trust-tile-${it.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <span
-              className={`shrink-0 inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${toneMap[it.tone]}`}
+              className={`shrink-0 inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${toneMap[it.tone]} transition-transform duration-300 group-hover/spot:scale-110 group-hover/spot:-rotate-6`}
               aria-hidden
             >
               <it.icon size={19} />
@@ -64,7 +75,7 @@ const TrustBadges = () => (
                 {it.desc}
               </div>
             </div>
-          </li>
+          </SpotlightCard>
         ))}
       </ul>
     </div>

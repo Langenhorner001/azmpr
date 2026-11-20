@@ -1,5 +1,6 @@
 import React from "react";
-import { Star } from "lucide-react";
+import { Star, Quote, BadgeCheck } from "lucide-react";
+import { SpotlightCard } from "../magic/SpotlightCard";
 
 // PLACEHOLDER reviews — swap with real customer testimonials when available.
 // Names + cities are fictional / generic Pakistani names. Quotes are written
@@ -74,12 +75,20 @@ const Testimonials = () => (
 
       <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
         {reviews.map((r) => (
-          <figure
+          <SpotlightCard
+            as="figure"
             key={r.name}
-            className="p-5 sm:p-6 rounded-2xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col"
+            className="rounded-2xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 hover:border-amber-300/70 dark:hover:border-amber-500/40 hover:-translate-y-0.5 transition-[transform,border-color] duration-300 flex flex-col"
+            innerClassName="p-5 sm:p-6 flex flex-col flex-1"
             data-testid={`testimonial-${r.name.toLowerCase().replace(/\s+/g, "-")}`}
           >
-            <Stars />
+            <Quote size={38} className="absolute -top-1 right-0 text-amber-400/20 dark:text-amber-400/15" aria-hidden />
+            <div className="flex items-center justify-between gap-2">
+              <Stars />
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-[10.5px] font-bold mr-8">
+                <BadgeCheck size={12} /> Verified retailer
+              </span>
+            </div>
             <blockquote className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-stone-700 dark:text-stone-200 flex-1">
               &ldquo;{r.quote}&rdquo;
             </blockquote>
@@ -102,7 +111,7 @@ const Testimonials = () => (
             <div className="mt-3 text-[10.5px] font-semibold tracking-wide uppercase text-emerald-700 dark:text-emerald-400">
               Purchased: {r.purchase}
             </div>
-          </figure>
+          </SpotlightCard>
         ))}
       </div>
     </div>

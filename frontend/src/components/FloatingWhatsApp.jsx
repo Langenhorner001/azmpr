@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackWhatsAppClick } from "../utils/analytics";
+import { useSiteSettings } from "../context/SiteSettingsContext";
 
-const WHATSAPP_URL =
-  "https://wa.me/923184214075?text=Hello%20AZ%20Distribution%2C%20I%20am%20interested%20in%20bulk%20purchase.%20Please%20share%20product%20catalog%20and%20pricing.";
+const WHATSAPP_MSG = "Hello AZ Distribution, I am interested in bulk purchase. Please share product catalog and pricing.";
 
 const FloatingWhatsApp = () => {
   const [open, setOpen] = useState(false);
+  const { waUrl } = useSiteSettings();
 
   return (
     <div
@@ -44,7 +45,7 @@ const FloatingWhatsApp = () => {
               Chat with us for bulk orders, pricing & catalog. We reply within minutes!
             </p>
             <a
-              href={WHATSAPP_URL}
+              href={waUrl(WHATSAPP_MSG)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#25D366] text-white text-xs font-montserrat font-bold tracking-wider hover:bg-[#1ebe5d] transition-colors"

@@ -1,10 +1,18 @@
 import React from "react";
 import { ArrowRight, MessageCircle, Truck, ShieldCheck, Zap } from "lucide-react";
-import { waUrl } from "./constants";
+import { useSiteSettings } from "../../context/SiteSettingsContext";
+import { MovingBorder, Shine } from "../magic/MovingBorder";
 
-const FINAL_WA = waUrl(
-  "Hello AZ Distribution, I'm ready to start a wholesale order. Please send me the latest catalog and pricing."
-);
+const PARTICLES = [
+  "w-2 h-2 top-10 left-[12%]",
+  "w-1.5 h-1.5 top-1/3 right-[10%]",
+  "w-3 h-3 bottom-12 left-[22%]",
+  "w-2 h-2 bottom-1/4 right-[26%]",
+  "w-1.5 h-1.5 top-16 right-[38%]",
+];
+
+const FINAL_MSG =
+  "Hello AZ Distribution, I'm ready to start a wholesale order. Please send me the latest catalog and pricing.";
 
 const microBadges = [
   { icon: Truck, label: "Pakistan-wide delivery" },
@@ -12,14 +20,26 @@ const microBadges = [
   { icon: Zap, label: "30-sec ordering" },
 ];
 
-const FinalCTA = () => (
+const FinalCTA = () => {
+  const { waUrl } = useSiteSettings();
+  return (
   <section
     id="contact"
     className="relative overflow-hidden bg-white dark:bg-stone-950 py-14 sm:py-20"
     data-testid="final-cta"
   >
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 text-center overflow-hidden bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 text-white shadow-xl">
+      <MovingBorder radius="rounded-3xl" thickness="p-[2px]" duration={7} color="#f59e0b" color2="#1c1917" innerClassName="" className="shadow-xl">
+      <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 text-center overflow-hidden bg-gradient-to-br from-amber-500 via-orange-500 to-rose-500 text-white">
+        {/* Floating ambient particles */}
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            aria-hidden
+            className={`absolute rounded-full bg-white/40 animate-float motion-reduce:animate-none ${p}`}
+            style={{ animationDelay: `${i * 0.7}s` }}
+          />
+        ))}
         {/* Decorative blob */}
         <div
           className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/15 blur-3xl"
@@ -42,12 +62,13 @@ const FinalCTA = () => (
 
           <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href={FINAL_WA}
+              href={waUrl(FINAL_MSG)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-stone-900 font-bold text-[15px] hover:bg-stone-100 transition-all w-full sm:w-auto shadow-md hover:shadow-lg"
+              className="group relative overflow-hidden inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-stone-900 font-bold text-[15px] hover:bg-stone-100 transition-[background-color,box-shadow] w-full sm:w-auto shadow-md hover:shadow-lg"
               data-testid="final-cta-whatsapp"
             >
+              <Shine />
               <MessageCircle size={17} className="text-emerald-600" />
               Order on WhatsApp
               <ArrowRight
@@ -74,8 +95,10 @@ const FinalCTA = () => (
           </ul>
         </div>
       </div>
+      </MovingBorder>
     </div>
   </section>
-);
+  );
+};
 
 export default FinalCTA;

@@ -6,7 +6,7 @@ import { CATEGORIES } from "./constants";
 import { trackCatalogFilter, trackProductInquiry } from "../../utils/analytics";
 import { useCart } from "../../context/CartContext";
 import { getProductMeta } from "../../lib/productMeta";
-import { parsePrice, formatPrice } from "../../lib/price";
+import WhatsAppDealButton from "./WhatsAppDealButton";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const SORT_KEY = "azdist_sort";
@@ -16,8 +16,6 @@ const FALLBACK_IMG =
 
 const SORT_OPTIONS = [
   { value: "featured", label: "Featured" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
   { value: "best-selling", label: "Best Selling" },
   { value: "top-rated", label: "Top Rated" },
   { value: "newest", label: "Newest" },
@@ -58,11 +56,7 @@ const ProductCard = ({ product, index }) => {
   const [imgErr, setImgErr] = useState(false);
   const { addItem, hasItem, openCart } = useCart();
 
-  const numericPrice = parsePrice(product.price);
-  const meta = useMemo(
-    () => getProductMeta(product.id, numericPrice),
-    [product.id, numericPrice]
-  );
+  const meta = useMemo(() => getProductMeta(product.id), [product.id]);
 
   const isOutOfStock =
     (product.stock_status && product.stock_status.toLowerCase() === "out of stock") ||
@@ -72,11 +66,6 @@ const ProductCard = ({ product, index }) => {
     typeof product.stock === "number" &&
     product.stock > 0 &&
     product.stock <= 10;
-
-  const hasPrice =
-    product.price &&
-    product.price !== "Contact for pricing" &&
-    product.price.trim() !== "";
 
   const inCart = hasItem(product.id);
 
@@ -178,30 +167,9 @@ const ProductCard = ({ product, index }) => {
           <StarRow rating={meta.rating} reviews={meta.reviews} />
         </div>
 
-        {/* Price line */}
-        <div className="mt-2.5 flex items-baseline gap-2 flex-wrap">
-          {hasPrice ? (
-            <>
-              <span
-                className="font-display font-extrabold text-[16px] sm:text-[17px] text-stone-900 dark:text-white"
-                data-testid={`product-price-${product.id}`}
-              >
-                {product.price}
-              </span>
-              {meta.fakeOriginal > numericPrice && (
-                <span
-                  className="text-[12px] line-through text-stone-400 dark:text-stone-500"
-                  data-testid={`product-original-${product.id}`}
-                >
-                  {formatPrice(meta.fakeOriginal)}
-                </span>
-              )}
-            </>
-          ) : (
-            <span className="font-display font-bold text-[14px] text-stone-700 dark:text-stone-200">
-              Contact for pricing
-            </span>
-          )}
+        {/* WhatsApp deal (replaces price) */}
+        <div className="mt-2.5">
+          <WhatsAppDealButton product={product} />
         </div>
 
         {/* CTA */}
@@ -262,7 +230,8 @@ const ProductSection = ({ onProductsLoaded }) => {
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState(() => {
     try {
-      return localStorage.getItem(SORT_KEY) || "featured";
+      const saved = localStorage.getItem(SORT_KEY);
+      return SORT_OPTIONS.some((o) => o.value === saved) ? saved : "featured";
     } catch {
       return "featured";
     }
@@ -290,7 +259,8 @@ const ProductSection = ({ onProductsLoaded }) => {
       const data = await res.json();
       const list = Array.isArray(data) ? data : [];
       setProducts(list);
-      if (onProductsLoaded) onProductsLoaded(list);
+      // Share only the full visible catalog (not a category subset) with marquee + purchase toast
+      if (onProductsLoaded && activeCat === "all") onProductsLoaded(list);
     } catch (e) {
       setError(e.message || "Failed to load");
     } finally {
@@ -314,18 +284,8 @@ const ProductSection = ({ onProductsLoaded }) => {
       );
     }
     // Sort
-    const enriched = list.map((p) => ({
-      p,
-      price: parsePrice(p.price),
-      meta: getProductMeta(p.id, parsePrice(p.price)),
-    }));
+    const enriched = list.map((p) => ({ p, meta: getProductMeta(p.id) }));
     switch (sort) {
-      case "price-asc":
-        enriched.sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
-        break;
-      case "price-desc":
-        enriched.sort((a, b) => (b.price || 0) - (a.price || 0));
-        break;
       case "best-selling":
         enriched.sort((a, b) => b.meta.salesCount - a.meta.salesCount);
         break;

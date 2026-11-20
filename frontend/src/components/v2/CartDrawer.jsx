@@ -2,14 +2,11 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, Trash2, MessageCircle, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
-import { formatPrice } from "../../lib/price";
-import { waUrl, BRAND } from "./constants";
+import { BRAND } from "./constants";
+import { useSiteSettings } from "../../context/SiteSettingsContext";
 
-const buildCheckoutMessage = (items, total) => {
-  const lines = items.map((it, i) => {
-    const lineTotal = it.price > 0 ? formatPrice(it.price * it.qty) : "Price on WhatsApp";
-    return `${i + 1}) ${it.name} x ${it.qty} — ${lineTotal}`;
-  });
+const buildCheckoutMessage = (items) => {
+  const lines = items.map((it, i) => `${i + 1}) ${it.name} x ${it.qty}`);
   return [
     `Assalam-o-Alaikum ${BRAND},`,
     "",
@@ -17,7 +14,7 @@ const buildCheckoutMessage = (items, total) => {
     "",
     ...lines,
     "",
-    total > 0 ? `Total: ${formatPrice(total)}` : "Total: Please confirm pricing on WhatsApp",
+    "Please behtareen deal/price batayein.",
     "",
     "Please confirm availability + delivery.",
     "Shukria!",
@@ -25,11 +22,12 @@ const buildCheckoutMessage = (items, total) => {
 };
 
 const CartDrawer = () => {
-  const { items, total, count, isOpen, closeCart, removeItem, updateQty } = useCart();
+  const { items, count, isOpen, closeCart, removeItem, updateQty } = useCart();
+  const { waUrl } = useSiteSettings();
 
   const handleCheckout = () => {
     if (items.length === 0) return;
-    const msg = buildCheckoutMessage(items, total);
+    const msg = buildCheckoutMessage(items);
     const url = waUrl(msg);
     // For debug visibility in screenshots
     if (typeof window !== "undefined") {
@@ -135,8 +133,11 @@ const CartDrawer = () => {
                         <div className="text-[13.5px] font-semibold text-stone-900 dark:text-white line-clamp-2 leading-snug">
                           {it.name}
                         </div>
-                        <div className="mt-1 text-[12px] text-stone-500 dark:text-stone-400">
-                          {it.priceLabel}
+                        <div
+                          className="mt-1 text-[12px] font-semibold text-[#1fb359]"
+                          data-testid={`cart-item-deal-${it.id}`}
+                        >
+                          Price WhatsApp par
                         </div>
                         <div className="mt-2 flex items-center justify-between gap-3">
                           {/* qty stepper */}
@@ -165,9 +166,6 @@ const CartDrawer = () => {
                             </button>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-[13px] font-bold text-stone-900 dark:text-white">
-                              {it.price > 0 ? formatPrice(it.price * it.qty) : "—"}
-                            </span>
                             <button
                               onClick={() => removeItem(it.id)}
                               className="text-stone-400 hover:text-rose-600 transition-colors"
@@ -191,14 +189,14 @@ const CartDrawer = () => {
                 <div className="flex items-baseline justify-between">
                   <span className="text-[13px] text-stone-500 dark:text-stone-400">Subtotal</span>
                   <span
-                    className="font-display font-extrabold text-xl text-stone-900 dark:text-white"
+                    className="font-display font-extrabold text-[15px] text-[#1fb359]"
                     data-testid="cart-subtotal"
                   >
-                    {total > 0 ? formatPrice(total) : "Confirm on WhatsApp"}
+                    Behtareen Deal WhatsApp par
                   </span>
                 </div>
                 <p className="text-[11.5px] text-stone-500 dark:text-stone-400 leading-relaxed">
-                  Final price + delivery confirmed on WhatsApp.
+                  Price, deal aur delivery WhatsApp par confirm hogi.
                 </p>
                 <button
                   onClick={handleCheckout}

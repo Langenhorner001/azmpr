@@ -5,9 +5,6 @@ export const EMAIL = "contactazdist@gmail.com";
 export const BRAND = "AZ Distribution";
 export const TAGLINE = "Pakistan's Trusted Distributor — Premium Imported Snacks & Sweets";
 
-export const waUrl = (message) =>
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
 export const NAV_LINKS = [
   { href: "#home", label: "Home" },
   { href: "#products", label: "Products" },
